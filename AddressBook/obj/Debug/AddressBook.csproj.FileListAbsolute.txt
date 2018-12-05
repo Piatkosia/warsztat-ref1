@@ -1,0 +1,7 @@
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\bin\Debug\AddressBook.exe.config
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\bin\Debug\AddressBook.exe
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\bin\Debug\AddressBook.pdb
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\obj\Debug\AddressBook.csprojAssemblyReference.cache
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\obj\Debug\AddressBook.csproj.CoreCompileInputs.cache
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\obj\Debug\AddressBook.exe
+C:\Users\apiatkowska\Desktop\warsztat-refaktoryzacja\AddressBook\obj\Debug\AddressBook.pdb
