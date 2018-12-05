@@ -50,10 +50,12 @@ namespace AddressBook
 
                             Console.Write("First name: ");
                             myPeople[totalPeopleAmount][0] = Console.ReadLine();
-                            Console.Write("Last name: ");
-                            myPeople[totalPeopleAmount][1] = Console.ReadLine();
-                            Console.Write("Phone: ");
+	                        Console.Write("Middle name : ");
+	                        myPeople[totalPeopleAmount][1] = Console.ReadLine();
+							Console.Write("Last name: ");
                             myPeople[totalPeopleAmount][2] = Console.ReadLine();
+                            Console.Write("Phone: ");
+                            myPeople[totalPeopleAmount][3] = Console.ReadLine();
 
                             totalPeopleAmount = totalPeopleAmount + 1;// First we add the new person to list and then increase. Keep it like that!
 
@@ -61,7 +63,7 @@ namespace AddressBook
                         case "3":
                             Console.WriteLine("Searching....");
                             Console.WriteLine("");
-                            int theNumbr = Console.Read() - 48 /*we need to deduct the base 48*/;
+	                        int theNumbr = GetNumberFromConsole();
                             myPeople[theNumbr][0] = Console.ReadLine();
                             break;
                         case "4":
@@ -70,7 +72,7 @@ namespace AddressBook
                             Console.WriteLine("Searching");
 
                             foreach (var p in myPeople.Where(p => p.Value.Any(i => i.Contains(pattern))))
-                                Console.WriteLine("{0} {1} {2}", p.Value[0], p.Value[1], p.Value[2]);
+                                Console.WriteLine("{0} {1} {2} {3}", p.Value[0], p.Value[1], p.Value[2], p.Value[3]);
 
                             break;
                         case "0":
@@ -94,6 +96,11 @@ namespace AddressBook
                 }
             }
         }
+
+	    private static int GetNumberFromConsole()
+	    {
+		    return Console.Read() - '0'; //ascii 48
+	    }
     }
 
     struct consts
