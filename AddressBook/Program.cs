@@ -9,102 +9,101 @@ namespace AddressBook
 {
     class Program
     {
-        static Dictionary<int, List<string>> myPeople = new Dictionary<int, List<string>>();
-        static int totalPeopleAmount;
+        static List<Person> myPeople = new List<Person>();
+	    static IVisualProvider provider = new ConsoleProvider();
 
         static void Main(string[] args)
         {
-
-            while (consts.TRUE)
+            while (true)
             {
                 try
                 {
-                    Console.WriteLine("======================");
-                    Console.WriteLine("*********MENU*********");
-                    Console.WriteLine("1. Show ALL");
-                    Console.WriteLine("2. Add");
-                    Console.WriteLine("3. Sync");
-                    Console.WriteLine("4. Search By Name");
-                    Console.WriteLine("0. Exit");
-                    Console.WriteLine("!!!!TODO Edit and Delete");
-                    Console.WriteLine("======================");
-
-                    var x1 = Console.ReadLine();
-
-                    switch (x1)
+                    PrintMenu();
+	                var command = Console.ReadLine();
+                    switch (command)
                     {
                         case "1":
-                            Console.WriteLine("Whole book");
-
-                            foreach (var p in myPeople)
-                                Console.WriteLine("{0} {1} {2}", p.Value[0], p.Value[1], p.Value[2]);
-
-                            break;
+                            GetAll();
+	                        break;
                         case "2":
-                            Console.WriteLine("Adding....");
-
-                            #region fixed memory preparation
-
-                            myPeople.Add(totalPeopleAmount, new List<string>(10) {"", "", "", "", "", "", "", "", "", ""});
-                            #endregion
-
-                            Console.Write("First name: ");
-                            myPeople[totalPeopleAmount][0] = Console.ReadLine();
-	                        Console.Write("Middle name : ");
-	                        myPeople[totalPeopleAmount][1] = Console.ReadLine();
-							Console.Write("Last name: ");
-                            myPeople[totalPeopleAmount][2] = Console.ReadLine();
-                            Console.Write("Phone: ");
-                            myPeople[totalPeopleAmount][3] = Console.ReadLine();
-
-                            totalPeopleAmount = totalPeopleAmount + 1;// First we add the new person to list and then increase. Keep it like that!
-
-                            break;
+							CreateNewPerson();
+	                        break;
                         case "3":
-                            Console.WriteLine("Searching....");
-                            Console.WriteLine("");
-	                        int theNumbr = GetNumberFromConsole();
-                            myPeople[theNumbr][0] = Console.ReadLine();
-                            break;
+                            GetOnePerson();
+	                        break;
                         case "4":
-                            Console.Write("Search pattern: ");
-                            string pattern  = Console.ReadLine();
-                            Console.WriteLine("Searching");
-
-                            foreach (var p in myPeople.Where(p => p.Value.Any(i => i.Contains(pattern))))
-                                Console.WriteLine("{0} {1} {2} {3}", p.Value[0], p.Value[1], p.Value[2], p.Value[3]);
-
-                            break;
+	                        SearchPerson();
+	                        break;
                         case "0":
-                            Console.WriteLine("Exiting....");
-                            Environment.Exit(0);
-                            break;
+                            Exit();
+	                        break;
                         default:
                             break;
                     }
                 }
                 catch(Exception exc)
                 {
-                    var c = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("ERROR!");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("ERROR!");
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("ERROR!");
-                    Console.ForegroundColor = c;
+	                PrintErrorMessage();
                 }
             }
         }
 
-	    private static int GetNumberFromConsole()
+	    private static void Exit()
 	    {
-		    return Console.Read() - '0'; //ascii 48
+		    provider.Print("Exiting....");
+		    Environment.Exit(0);
 	    }
-    }
 
-    struct consts
-    {
-        public static bool TRUE = true;
+	    private static void SearchPerson()
+	    {
+		    string pattern = provider.GetString("Pattern : ");
+		    provider.Print("Searching");
+		    foreach (var p in myPeople.Where(q => q.Contains(pattern)))
+			    provider.Print(p);
+	    }
+	    private static void GetOnePerson()
+	    {
+		    provider.Print("Get....\n");
+		    int index = provider.GetNumber();
+		    provider.Print(myPeople[index]);
+	    }
+	    private static void GetAll()
+	    {
+		    provider.Print("Whole book");
+		    foreach (var p in myPeople)
+		    {
+			    provider.Print(p);
+		    }
+	    }
+
+	    private static void CreateNewPerson()
+		{
+			provider.Print("Adding....");
+			myPeople.Add(new Person
+				{
+					FirstName = provider.GetString("First name : "),
+					MiddleName = provider.GetString("Middle name : "),
+					LastName = provider.GetString("Last name: "),
+					Phone = provider.GetString("Phone: ")
+				});
+		}
+
+		private static void PrintErrorMessage()
+	    {
+		    provider.PrintError("ERROR!");
+	    }
+
+	    private static void PrintMenu()
+	    {
+		    Console.WriteLine("======================");
+		    Console.WriteLine("*********MENU*********");
+		    Console.WriteLine("1. Show ALL");
+		    Console.WriteLine("2. Add");
+		    Console.WriteLine("3. Get contact by ID");
+		    Console.WriteLine("4. Search");
+		    Console.WriteLine("0. Exit");
+		    Console.WriteLine("!!!!TODO Edit and Delete");
+		    Console.WriteLine("======================");
+	    }
     }
 }
