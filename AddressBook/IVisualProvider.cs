@@ -9,5 +9,6 @@ namespace AddressBook
 		void PrintError(string error);
 		void Print(object objectToPrint);
 		int GetNumber();
+		object GetString();
 	}
 }

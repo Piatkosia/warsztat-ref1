@@ -46,7 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleHeader.cs" />
+    <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="ConsoleProvider.cs" />
     <Compile Include="DataInterface.cs" />
+    <Compile Include="IPersonRepository.cs" />
+    <Compile Include="IVisualProvider.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="PersonRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

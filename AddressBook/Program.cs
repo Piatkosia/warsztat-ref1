@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AddressBook
 {
     class Program
     {
-        static List<Person> myPeople = new List<Person>();
+	    private static IPersonRepository myPeople = new PersonRepository();
 	    static IVisualProvider provider = new ConsoleProvider();
+		static IPersonValidator validator = new PersonValidator();
+		private static PersonService personService= new PersonService(myPeople, validator);
 
         static void Main(string[] args)
         {
-            while (true)
+			while (true)
             {
                 try
                 {
                     PrintMenu();
-	                var command = Console.ReadLine();
+	                var command = provider.GetString();
                     switch (command)
                     {
                         case "1":
@@ -58,19 +55,19 @@ namespace AddressBook
 	    {
 		    string pattern = provider.GetString("Pattern : ");
 		    provider.Print("Searching");
-		    foreach (var p in myPeople.Where(q => q.Contains(pattern)))
+		    foreach (var p in personService.Search(pattern))
 			    provider.Print(p);
 	    }
 	    private static void GetOnePerson()
 	    {
 		    provider.Print("Get....\n");
 		    int index = provider.GetNumber();
-		    provider.Print(myPeople[index]);
+		    provider.Print(personService.Get(index));
 	    }
 	    private static void GetAll()
 	    {
 		    provider.Print("Whole book");
-		    foreach (var p in myPeople)
+		    foreach (var p in personService.GetAll())
 		    {
 			    provider.Print(p);
 		    }
@@ -79,7 +76,7 @@ namespace AddressBook
 	    private static void CreateNewPerson()
 		{
 			provider.Print("Adding....");
-			myPeople.Add(new Person
+			personService.Add(new Person
 				{
 					FirstName = provider.GetString("First name : "),
 					MiddleName = provider.GetString("Middle name : "),
@@ -95,15 +92,15 @@ namespace AddressBook
 
 	    private static void PrintMenu()
 	    {
-		    Console.WriteLine("======================");
-		    Console.WriteLine("*********MENU*********");
-		    Console.WriteLine("1. Show ALL");
-		    Console.WriteLine("2. Add");
-		    Console.WriteLine("3. Get contact by ID");
-		    Console.WriteLine("4. Search");
-		    Console.WriteLine("0. Exit");
-		    Console.WriteLine("!!!!TODO Edit and Delete");
-		    Console.WriteLine("======================");
+		    provider.Print("======================");
+		    provider.Print("*********MENU*********");
+		    provider.Print("1. Show ALL");
+		    provider.Print("2. Add");
+		    provider.Print("3. Get contact by ID");
+		    provider.Print("4. Search");
+		    provider.Print("0. Exit");
+		    provider.Print("!!!!TODO Edit and Delete");
+			provider.Print("======================");
 	    }
     }
 }

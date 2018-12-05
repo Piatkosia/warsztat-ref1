@@ -37,5 +37,10 @@ namespace AddressBook
 		{
 			return ConsoleHelper.GetNumberFromConsole();
 		}
+
+		public object GetString()
+		{
+			return Console.ReadLine();
+		}
 	}
 }
