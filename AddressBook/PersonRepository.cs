@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AddressBook
 {
-	internal class PersonRepository : IPersonRepository
+	public class PersonRepository : IPersonRepository
 	{
 		List<DataInterface> people = new List<DataInterface>();
 

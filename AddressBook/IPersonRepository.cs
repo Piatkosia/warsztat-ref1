@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AddressBook
 {
 
-	internal interface IPersonRepository : IEnumerable<DataInterface>
+	public interface IPersonRepository : IEnumerable<DataInterface>
 	{
 		DataInterface this[int number] { get; set; }
 		void Add(DataInterface person);

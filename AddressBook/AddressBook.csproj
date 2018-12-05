@@ -51,9 +51,13 @@
     <Compile Include="ConsoleProvider.cs" />
     <Compile Include="DataInterface.cs" />
     <Compile Include="IPersonRepository.cs" />
+    <Compile Include="IPersonService.cs" />
+    <Compile Include="IPersonValidator.cs" />
     <Compile Include="IVisualProvider.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonRepository.cs" />
+    <Compile Include="PersonService.cs" />
+    <Compile Include="PersonValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AddressBook
 {
 
-	internal interface IPersonValidator
+	public interface IPersonValidator
 	{
 		bool IsValid(DataInterface person);
 	}

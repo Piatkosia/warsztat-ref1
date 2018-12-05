@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AddressBook
 {
 
-	internal class PersonService
+	public class PersonService : IPersonService
 	{
 		private IPersonRepository myPeople;
 		private IPersonValidator validator;
@@ -34,12 +34,15 @@ namespace AddressBook
 			return myPeople;
 		}
 
-		public void Add(DataInterface person)
+		public bool Add(DataInterface person)
 		{
 			if (validator.IsValid(person))
 			{
 				myPeople.Add(person);
+				return true;
 			}
+
+			return false;
 		}
 	}
 }
